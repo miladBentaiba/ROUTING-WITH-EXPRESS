@@ -1,19 +1,12 @@
 express= require('express')
-
 const app = express()
 
-var date = new Date();
-
-var current_hour = date.getHours();
+let current_hour = new Date().getHours();
 
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/public/home.html');
-})
-
-app.use((req, res, next)=> {
-  if ( (current_hour>8)&&(current_hour<17) ) next();
+  if ( (current_hour>8)&&(current_hour<17) ) res.sendFile(__dirname + '/public/home.html');
   else res.sendFile(__dirname + '/public/out-of-service.html');
-});
+})
 
 app.use(express.static(__dirname + '/public'));
 
